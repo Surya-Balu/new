@@ -59,10 +59,82 @@ class calculatorController extends Controller
           public function logs()
           {
              $calc = new calculator();
-             $data=$calc->where('created_at','>','2023-07-01 11:49:00')->get();
-             return view('calculator.logs')->with('data',$data);
+              // to get all records with some conditions on where 
+             $data=$calc->all();
+                   return view('calculator.logs')->with('data',$data);
            }
             
-         
+           public function queries()
+           {
+               // this will return all the records
+              $calc = new calculator();
+            //filter = all => list all data
+             //filter = first => display first record
+             //filter = last => display last record
+             //filter = top, value=3 => display top 3 records
+             // filter = reverse => display values in reverse order
+             $filter = request()->get('filter');   
+             $value = request()->get('value');  
+          
+                     if($filter == 'all'){
+                        $data=$calc->all();
+                         echo "All records " .$data->count(). "<br>";
+           
+                         foreach($data as $d){
+                             echo "id - ". $d->id . " => ";
+                             echo "a - ". $d->a . " => ";
+                             echo "b - ". $d->b . " => ";
+                             echo "opr - ". $d->opr . " => ";
+                             echo "created_at - ". $d->created_at . "<br>";
+                         }
+             }
+                // this will return first record
+              if($filter == 'first'){
+                 echo "First record <br> "; 
+              $d = $calc->first();
+              echo "id - ". $d->id . "<br>";
+              echo "a - ". $d->a . "<br>";
+              echo "b - ". $d->b . "<br>";
+              echo "opr - ". $d->opr . "<br>";
+              echo "created_at - ". $d->created_at . "<br>";
+             }
+             // return view('calculator.logs')->with('data',$data);
 
-    }
+             // this will return last record
+             if($filter == 'last'){
+                echo "Last record <br> "; 
+             $d = $calc->orderby ('id','desc')->first();
+             echo "id - ". $d->id . "<br>";
+             echo "a - ". $d->a . "<br>";
+             echo "b - ". $d->b . "<br>";
+             echo "opr - ". $d->opr . "<br>";
+             echo "created_at - ". $d->created_at . "<br>";
+            } 
+
+            //this will return top 3 records
+            if($filter == 'top3'){
+                $data=$calc->limit(3)->get();
+                 echo "Top 3 records " .$data->count(). "<br>";
+   
+                 foreach($data as $d){
+                     echo "id - ". $d->id . " => ";
+                     echo "a - ". $d->a . " => ";
+                     echo "b - ". $d->b . " => ";
+                     echo "opr - ". $d->opr . " => ";
+                     echo "created_at - ". $d->created_at . "<br>";
+                 }
+     }
+        //this will return reverse order records
+     if($filter == 'reverse'){
+        $data=$calc->orderby('id','desc')->get();
+         echo "Reverse order records " .$data->count(). "<br>";
+         foreach($data as $d){
+             echo "id - ". $d->id . " => ";
+             echo "a - ". $d->a . " => ";
+             echo "b - ". $d->b . " => ";
+             echo "opr - ". $d->opr . " => ";
+             echo "created_at - ". $d->created_at . "<br>";
+         }
+}
+  }      
+     }
