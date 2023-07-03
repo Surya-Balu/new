@@ -12,7 +12,7 @@
     <section class=" bg-warning-subtle p-4 m-3 ">
     <h1><center>String Result</center></h1>
     <hr>
-    <div><b> the string  is   : {{$str}}</b> </div><br>
+    <div><b> the string  is   : {{ $str }}</b> </div><br>
     <div><b> the result is    : {{$result}}</b> </div>
     <center>
     <a class="btn btn-primary" href="/man/form"> Back to Form </a><center>

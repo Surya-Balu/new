@@ -10,7 +10,9 @@
     <section class="contaner p-1 m-5 bg-primary border border-black">
     <h1><center>Calculator</center></h1></section>
     
+    
     <form class="bg-warning p-5 m-5" action="/calculator/result" method="get" >
+      
     <div class="row">
     <div class="col ">
     <label for="formGroupExampleInput" class="form-label p-1 m-1">Enter A value :</label><br>
@@ -29,8 +31,12 @@
         </select>
         </div>
         <div>
-        <button type="submit" class="btn btn-success p-2 m-2">Submit</button>
+          <center>
+        <button type="submit" class="btn btn-success p-2 m-2 float-right">Submit</button >
+        </center>
         </div>
+        <a href="/calculator/logs" class="float-center">logs</a>
+        
 </form> 
 
 </body>

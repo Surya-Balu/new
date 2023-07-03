@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\CalculatorController;
+use App\Http\Controllers\stringController;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,6 +17,22 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
+});
+
+Route::get('/about', function () {
+    return view('about');
+});
+
+Route::get('/contact', function () {
+    return view('contact');
+});
+
+Route::get('/galleryone', function () {
+    return view('gallery');
+});
+
+Route::get('/about/history', function () {
+    return view('history');
 });
 
 Route::get('/calculator/form', function () {
@@ -40,6 +58,8 @@ Route::get('/calculator/result', function () {
     ->with('opr',$opr);
 });
 
+/*
+
 Route::get('/man/form', function () {
     return view('man.form');
 });
@@ -60,4 +80,18 @@ Route::get('/man/result', function () {
     ->with('opr',$opr);
 });
 
+*/
 
+Route::get('/calculator/form', [CalculatorController::class, 'form']);
+Route::get('/calculator/result', [CalculatorController::class, 'result']);
+Route::get('/calculator/logs', [CalculatorController::class, 'logs']);
+
+Route::get('/man/form', [stringController::class, 'form']);
+Route::get('/man/result', [stringController::class, 'result']);
+Route::get('/man/logs', [stringController::class, 'logs'])->name('man.logs');
+
+Route::get('/string/form', function () {
+});
+
+Route::get('/string/result', function () {
+});

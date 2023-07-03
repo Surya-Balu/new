@@ -11,6 +11,7 @@
     <h1><center> StringManipulator App</center></h1></section>
     
     <form class="bg-info-subtle p-5 m-5" action="/man/result" method="get" >
+      <button class="bg-primary p-2 text-white rounded"><a href="/man/logs" class="text-white" >Logs</a></button>
     <div class="row">
     <div class="col ">
     <label for="formGroupExampleInput" class="form-label p-1 m-1">Enter String  :</label><br>
@@ -20,7 +21,7 @@
     <label for="inputState" class="form-label"> Operation :</label>
     <select id="inputState" name="opr" class="form-select">
       <option value="str">String Reverse </option>
-      <option value="noofw">NO Of Wods</option>
+      <option value="noofw">NO Of Words</option>
       <option value="noofl">NO Of letters</option>
         </select>
         </div>
