@@ -27,9 +27,7 @@
         </div>
         <div >
         <button type="submit" class="btn btn-success p-2 m-2">Submit</button>
-        </div>
-        <center>
-<div><button class="bg-primary p-2 text-white rounded"><a href="/man/logs" class="text-white" >Logs</a></button></div>
+<button  type="button" class="btn btn-info"><a href="/man/logs"  >Logs</a></button></div>
 </center>
 </form>         
 </body>

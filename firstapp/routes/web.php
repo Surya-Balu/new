@@ -14,6 +14,10 @@ use App\Http\Controllers\stringController;
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::get('/calculator/all', function () {
+    return view('calculator.all');
+});
+
 
 Route::get('/', function () {
     return view('welcome');
@@ -39,6 +43,11 @@ Route::get('/calculator/form', function () {
     return view('calculator.form');
 });
 
+Route::get('/calculator/show', function () {
+    return view('calculator.show');
+});
+
+
 Route::get('/calculator/result', function () {
     $a=request()->get('a');
     $b=request()->get('b');
@@ -58,7 +67,7 @@ Route::get('/calculator/result', function () {
     ->with('opr',$opr);
 });
 
-/*
+
 
 Route::get('/man/form', function () {
     return view('man.form');
@@ -80,17 +89,25 @@ Route::get('/man/result', function () {
     ->with('opr',$opr);
 });
 
-*/
+
 
 Route::get('/calculator/form', [CalculatorController::class, 'form']);
 Route::get('/calculator/result', [CalculatorController::class, 'result']);
 Route::get('/calculator/logs', [CalculatorController::class, 'logs']);
 Route::get('/calculator/queries', [CalculatorController::class, 'queries']);
+Route::get('/calculator/show/{id} ', [CalculatorController::class, 'show']);
+Route::get('/calculator/update/{id}', [CalculatorController::class, 'update']);
+Route::post('/calculator/savedata/{id}', [CalculatorController::class, 'savedata']);
+Route::post('/calculator/destroy/{id}', [CalculatorController::class, 'destroy']);
 
 Route::get('/man/form', [stringController::class, 'form']);
 Route::get('/man/result', [stringController::class, 'result']);
 Route::get('/man/logs', [stringController::class, 'logs'])->name('man.logs');
 Route::get('/man/queries', [stringController::class, 'queries']);
+Route::get('/man/show/{id} ', [CalculatorController::class, 'show']);
+Route::get('/man/update/{id}', [CalculatorController::class, 'update']);
+Route::post('/man/savedata/{id}', [CalculatorController::class, 'savedata']);
+Route::post('/man/destroy/{id}', [CalculatorController::class, 'destroy']);
 
 Route::get('/string/form', function () {
 });

@@ -9,18 +9,18 @@ use App\Models\Strm;
 
 class stringController extends Controller
 {
-        public function form()
-        {
+    public function form()
+    {
             
            return view('man.form');
            
-        }
-        public function result(Request $request)
-        {
+    }
+    public function result(Request $request)
+    {
             $str=request()->get('str');
             $opr=request()->get('opr');
             $result=null;
-        echo "<h1>Surya</h1>"; 
+            //echo "<h1>Surya</h1>"; 
             if($opr=='str')
             $result=strrev($str);
             elseif($opr=='noofw')
@@ -41,29 +41,27 @@ class stringController extends Controller
             ->with('result',$result)
             ->with('str',$str)
             ->with('opr',$opr);            
-        }
-        public function logs()
-        {
+    }
+    public function logs()
+    {
             $s = new strm();
            $data = $s->all(); 
                 
             return view('man.logs')->with('data', $data);
-        //    return view('$data.logs',compact('$data'));
-        }
-    
-
-public function queries()
- {
-    $s = new strm();
-    $filter = request()->get('filter');   
-    $value = request()->get('value');  
+         //    return view('$data.logs',compact('$data'));
+    }
+    public function queries()
+    {
+        $s = new strm();
+        $filter = request()->get('filter');   
+        $value = request()->get('value');  
  
 
-    if($filter == 'all'){
+        if($filter == 'all'){
         $data = $s->all();
         echo"All records  " .$data->count()."<br>";
         
-foreach($data as $d){
+       foreach($data as $d){
                 echo "id - ".$d->id. " ~ ";
                 echo "string - ".$d->str. " ~ ";
                 echo "opr - ".$d->opr. " ~ ";
@@ -95,19 +93,57 @@ foreach($data as $d){
                  echo "string - ".$d->str. " ~ ";
                echo "opr - ".$d->opr. " ~ ";
              echo "created_at - ".$d->created_at. "<br>"; 
-    }
-  }               
+        }
+     }               
 
-  if($filter == 'reverse'){
-    $data = $s->orderby ('id', 'desc')->get();
-    echo"Reverse order records  " .$data->count()."<br>";
+     if($filter == 'reverse'){
+     $data = $s->orderby ('id', 'desc')->get();
+        echo"Reverse order records  " .$data->count()."<br>";
     
-foreach($data as $d){
+        foreach($data as $d){
             echo "id - ".$d->id. " ~ ";
             echo "string - ".$d->str. " ~ ";
             echo "opr - ".$d->opr. " ~ ";
             echo "created_at - ".$d->created_at. "<br>"; 
                    }
                 }
-}
+    }
+    public function show($id)
+    {
+        $alert  = request()->session()->get('alert');
+        // $r=DB::table('strms')->where('id',$id)->first();
+         //$r=DB::table('strms')->find($id);
+         $r=man::find($id);
+        // dd($r);
+       return view('man.show')->with('data',$r)->with('alert' , $alert);
+    }
+    public function update($id)
+    {
+        $r=man::find($id);
+        return view('man.update')->with('data',$r);
+    }
+    public function savedata($id)
+    {
+        $r=man::find($id);
+        $data =request()->all();
+        $r->str=request()->get('str');
+        $r->opr=request()->get('opr');
+        if(request()->get('opr') == 'str')
+        $r->result =strrev($r->str) ;
+        if(request()->get('opr') == 'noofw')
+        $r->result =str_word_count($r->str);
+        if(request()->get('opr') == 'noofl')
+        $r->result =strlen($r->str);
+            $r->save();
+            $alert ="you have succesfully updated (" .$r->id.")";
+            return redirect()->to('man/show/' .$id)
+            ->with('alert' , $alert);
+    }
+    public function destroy($id)
+    {
+        $r=man::find($id);
+        if($r)
+        $r->delete();
+        return redirect()->to('man/logs/');
+    }
 }
