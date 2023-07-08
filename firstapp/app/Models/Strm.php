@@ -8,5 +8,4 @@ use Illuminate\Database\Eloquent\Model;
 class Strm extends Model
 {
     use HasFactory;
-    protected $fillable = ['str','opr','result'];
 }

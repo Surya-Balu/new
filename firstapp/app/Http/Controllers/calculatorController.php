@@ -146,8 +146,8 @@ class calculatorController extends Controller
     {
         $alert  = request()->session()->get('alert');
         // $r=DB::table('calculators')->where('id',$id)->first();
-        //$r=DB::table('calculators')->find($id);
-        $r=calculator::find($id);
+         //$r=DB::table('calculators')->find($id);
+         $r=calculator::find($id);
         // dd($r);
        return view('calculator.show')->with('data',$r)->with('alert' , $alert);
     }
