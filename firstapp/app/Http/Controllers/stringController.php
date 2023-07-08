@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Strm;
-
+use Illuminate\Support\Facades\DB;
 
 
 class stringController extends Controller
@@ -112,36 +112,36 @@ class stringController extends Controller
     {
         $alert  = request()->session()->get('alert');
         // $r=DB::table('strms')->where('id',$id)->first();
-         //$r=DB::table('strms')->find($id);
-         $r=man::find($id);
+        //$r=DB::table('strms')->find($id);
+        $r=strm::find($id);
         // dd($r);
-       return view('man.show')->with('data',$r)->with('alert' , $alert);
+        return view('man.show')->with('data',$r)->with('alert' , $alert);
     }
     public function update($id)
     {
-        $r=man::find($id);
+        $r=strm::find($id);
         return view('man.update')->with('data',$r);
     }
     public function savedata($id)
     {
-        $r=man::find($id);
-        $data =request()->all();
-        $r->str=request()->get('str');
-        $r->opr=request()->get('opr');
-        if(request()->get('opr') == 'str')
-        $r->result =strrev($r->str) ;
-        if(request()->get('opr') == 'noofw')
-        $r->result =str_word_count($r->str);
-        if(request()->get('opr') == 'noofl')
-        $r->result =strlen($r->str);
-            $r->save();
-            $alert ="you have succesfully updated (" .$r->id.")";
-            return redirect()->to('man/show/' .$id)
-            ->with('alert' , $alert);
+         $r=strm::find($id);
+         $data =request()->all();
+         $r->str=request()->get('str');
+         $r->opr=request()->get('opr');
+         if(request()->get('opr') == 'str')
+         $r->result =strrev($r->str) ;
+         if(request()->get('opr') == 'noofw')
+         $r->result =str_word_count($r->str);
+         if(request()->get('opr') == 'noofl')
+         $r->result =strlen($r->str);
+         $r->save();
+         $alert ="you have succesfully updated (" .$r->id.")";
+         return redirect()->to('man/show/' .$id)
+         ->with('alert' , $alert);
     }
     public function destroy($id)
     {
-        $r=man::find($id);
+        $r=strm::find($id);
         if($r)
         $r->delete();
         return redirect()->to('man/logs/');

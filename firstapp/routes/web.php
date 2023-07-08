@@ -104,10 +104,10 @@ Route::get('/man/form', [stringController::class, 'form']);
 Route::get('/man/result', [stringController::class, 'result']);
 Route::get('/man/logs', [stringController::class, 'logs'])->name('man.logs');
 Route::get('/man/queries', [stringController::class, 'queries']);
-Route::get('/man/show/{id} ', [CalculatorController::class, 'show']);
-Route::get('/man/update/{id}', [CalculatorController::class, 'update']);
-Route::post('/man/savedata/{id}', [CalculatorController::class, 'savedata']);
-Route::post('/man/destroy/{id}', [CalculatorController::class, 'destroy']);
+Route::get('/man/show/{id} ', [stringController::class, 'show']);
+Route::get('/man/update/{id}', [stringController::class, 'update']);
+Route::post('/man/savedata/{id}', [stringController::class, 'savedata']);
+Route::post('/man/destroy/{id}', [stringController::class, 'destroy']);
 
 Route::get('/string/form', function () {
 });
