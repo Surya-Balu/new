@@ -142,6 +142,15 @@ class calculatorController extends Controller
             }
 
     }      
+    public function api($id)
+    {
+        //$alert  = request()->session()->get('alert');
+        // $r=DB::table('calculators')->where('id',$id)->first();
+        //$r=DB::table('calculators')->find($id);
+        $r=calculator::find($id);
+        // dd($r);
+       return $r;
+    }
     public function show($id)
     {
         $alert  = request()->session()->get('alert');
